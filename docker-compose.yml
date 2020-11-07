@@ -1,0 +1,51 @@
+version: "3"
+
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django
+    volumes:
+      - ./src:/src
+    env_file:
+      - db_keys.txt
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: python manage.py runserver 0.0.0.0:8000
+
+  db:
+    image: postgres:latest
+    container_name: postgres
+    env_file:
+      - db_keys.txt
+
+  adminer:
+    image: adminer
+    container_name: admin_db
+    ports:
+      - "8080:8080"
+
+  dick:
+    image: redis:latest
+    container_name: redis_db1
+
+  # celery_w:
+  #   image: celery:latest
+  #   container_name: celery_worker
+  #   environment:
+  #     - CELERY_BROKER_URL=redis://redis
+  #   volumes:
+  #     - ./src:/src
+
+  # celery_b:
+  #   image: celery:latest
+  #   container_name: celery_binder
+  #   environment:
+  #     - CELERY_BROKER_URL=redis://redis
+  #   volumes:
+  #     - ./src:/src
+
