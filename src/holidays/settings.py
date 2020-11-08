@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'b^42dmu_ch&b6mrks9m-i(5^nnjewf-(s&-ps0_ft@jpmsao3k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -124,8 +124,13 @@ USE_TZ = True
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://dick://127.0.0.1:6379/1",
+        "LOCATION": "redis://redis://127.0.0.1:6379/1",
     }
 }
+
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND  = 'redis://redis:6379'
+CELERY_ACCEPT_CONTENT = ['json'] 
+CELERY_TASK_SERIALIZER = 'json'
 
 STATIC_URL = '/static/'
