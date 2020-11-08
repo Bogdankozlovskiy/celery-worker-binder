@@ -38,11 +38,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: celery_worker
+    container_name: celery_wb
     volumes:
       - ./src:/src
     depends_on:
       - redis
-    command: celery -A holidays worker -l info
+    command: celery -A holidays worker -l info -B
 
 

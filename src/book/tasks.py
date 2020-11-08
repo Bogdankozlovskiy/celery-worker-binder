@@ -14,3 +14,8 @@ def mul(x, y):
 @shared_task
 def xsum(numbers):
     return sum(numbers)
+
+
+@shared_task
+def hello():
+	return "hello world"
