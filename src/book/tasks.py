@@ -1,4 +1,5 @@
 from celery import shared_task
+from book.models import Holiday
 
 
 @shared_task
@@ -18,4 +19,5 @@ def xsum(numbers):
 
 @shared_task
 def hello():
-	return "hello world"
+	quary_length = Holiday.objects.all().count()
+	return f"hello world {quary_length}"
