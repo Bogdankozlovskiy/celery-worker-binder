@@ -45,6 +45,9 @@ services:
       - redis
     env_file:
       - db_keys.txt
-    command: celery -A holidays worker -l info -B
+    ports:
+      - "5555:5555"
+    command: celery -A holidays worker -l info -B -E
+# celery -A holidays events
 
 
