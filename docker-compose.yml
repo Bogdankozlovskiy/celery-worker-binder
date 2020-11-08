@@ -47,7 +47,7 @@ services:
       - db_keys.txt
     ports:
       - "5555:5555"
-    command: celery -A holidays worker -l info -B -E
-# celery -A holidays events
+    command: bash -c "celery -A holidays worker -l info -B & celery flower -A holidays"
+# celery -A holidays events     'required flag -E'
 
 
